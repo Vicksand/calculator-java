@@ -1,41 +1,65 @@
- Analiză Metrici și Revizuire Cod
+📊 Analiză Metrici și Revizuire Cod
+✅ 1. LOC (Lines of Code)
+Fișier	LOC
+Calculator.java	148
+Start.java	29
+Total	177
 
-### 1. LOC (Lines of Code)
-Total LOC: **276**  
-(Suma tuturor fișierelor `.java` din proiect)
+Notă: Linie de cod = toate liniile semnificative, excluzând spații goale și comentarii.
 
----
+✅ 2. Complexitate
+🔧 Metoda evaluateExpression(String expression)
+Complexitate ciclomatică: 10
+Decizii: if (6), try-catch (1), for (2), return condiționat (1)
 
-### 2. Complexitate
+Complexitate cognitivă: 13
 
-#### evaluatedExpression
-- Complexitate ciclomatică: **10**
-- Complexitate cognitivă: **13**
-- Observație: Metodă prea lungă și aglomerată; conține multe ramificații și operații fără modularizare.
+Ramificații multiple
 
-#### Calculate
-- Complexitate ciclomatică: **6**
-- Complexitate cognitivă: **9**
-- Observație: Codul include multe `if` și `else`, ceea ce reduce lizibilitatea. Poate fi împărțit în metode mai mici.
+Înălțimea de imbricare ridicată (nesting)
 
----
+Cod greu de urmărit din cauza tratărilor manuale ale expresiilor și listelor
 
-### 3. Revizuire informală (Code Review)
+🔧 Metoda Calculate(List<Float>, List<String>)
+Complexitate ciclomatică: 12
+Multiple ramificații și recursivitate (6 x if, 1 x else, 4 x return)
 
-| Fișier | Linie | Observație |
-|--------|-------|------------|
-| Calculator.java | 15 | Numele metodei `evaluatedExpression` este greșit gramatical – ar trebui să fie `evaluateExpression`. |
-| Calculator.java | 26 | Cod duplicat la verificarea operatorilor. Se poate extrage într-o metodă separată. |
-| Calculator.java | 38 | Lipsă tratare excepții. Dacă expresia e invalidă, aplicația poate crăpa. |
-| Calculator.java | 46 | Folosirea excesivă a `if-else` reduce lizibilitatea. Se recomandă `switch` sau strategii OOP. |
-| Calculator.java | 67 | Lipsă validare pentru împărțirea la zero. |
-| Calculator.java | General | Codul nu are teste unitare sau clase de test, ceea ce reduce testabilitatea și mentenabilitatea. |
+Complexitate cognitivă: 16
 
----
+Cod recursiv
 
-### 4. Concluzii
+Nivel ridicat de imbricare
 
-- Codul funcționează, dar este lipsit de modularitate și testabilitate.
-- Este recomandat să se refactorizeze metodele lungi și să se adauge teste unitare.
-- Respectarea principiului SRP (Single Responsibility Principle) ar îmbunătăți mult claritatea codului.
+Repetiție în tratamentul fiecărei operații
+
+Fără separare clară a responsabilităților
+
+✅ 3. Revizuire informală (Code Review)
+Fișier	Linie	Observație
+Calculator.java	4	Declarația import java.util.Scanner; apare greșit în interiorul clasei.
+Calculator.java	7	Clasa Start ar trebui să fie într-un fișier separat Start.java.
+Calculator.java	32	Denumirea metodei evaluatedExpression este greșită – ar trebui să fie evaluateExpression.
+Calculator.java	40	Folosirea directă a 0 + expression este neclară – ar trebui explicată sau encapsulată.
+Calculator.java	43-49	Se pot unifica verificările simbolurilor printr-o buclă sau mapare.
+Calculator.java	64	Lipsă validare expresii incomplete (ex: 2+).
+Calculator.java	73	Nu se tratează împărțirea la zero – poate duce la excepție sau NaN.
+Calculator.java	82-145	Cod foarte duplicat; același tipar este repetat pentru toate operațiile.
+Calculator.java	General	Metoda Calculate este recursivă, dar fără limită de adâncime – risc de StackOverflow.
+Calculator.java	General	Nu există teste unitare – greu de validat corectitudinea.
+Calculator.java	General	Nu se respectă principiul SRP (Single Responsibility Principle).
+
+✅ 4. Recomandări de îmbunătățire
+Separă clasele în fișiere diferite (Start, Calculator, Operations)
+
+Refactorizează metoda Calculate pentru a elimina recursivitatea și duplicarea codului
+
+Adaugă validări suplimentare (expresii invalide, împărțire la zero)
+
+Adaugă teste unitare (folosește JUnit)
+
+Utilizează un parser matematic dedicat în loc de parsare manuală
+
+Respectă principiile OOP pentru modularitate și mentenabilitate
+
+Adaugă Javadoc pentru metodele publice
 
