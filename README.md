@@ -1,4 +1,4 @@
----
+
 
 ## 📊 Analiză Metrici și Revizuire Cod
 
@@ -6,24 +6,24 @@
 
 | Fișier         | LOC  |
 |----------------|------|
-| Calculator.java | 148  |
-| Start.java      | 29   |
-| **Total**       | **177** |
+| Calculator.java | 134  |
+| Start.java      | 19   |
+| **Total**       | **153** |
 
-*Notă: Linie de cod = toate liniile semnificative, excluzând spații goale și comentarii.*
+*Notă: Linie de cod fara License(este un text)cu o sa fie total 170*
 
 ---
 
 ### ✅ 2. Complexitate
 
-#### 🔧 Metoda `evaluateExpression(String expression)`
-- **Complexitate ciclomatică**: `10`  
-- **Complexitate cognitivă**: `13`  
+####  Metoda `evaluateExpression(String expression)`
+- **Complexitate ciclomatică**: `6`  
+- **Complexitate cognitivă**: `12`  
 - Observație: Metodă lungă, aglomerată cu verificări multiple și conversii; poate fi împărțită în funcții auxiliare.
 
-#### 🔧 Metoda `Calculate(List<Float>, List<String>)`
-- **Complexitate ciclomatică**: `12`  
-- **Complexitate cognitivă**: `16`  
+####  Metoda `Calculate(List<Float>, List<String>)`
+- **Complexitate ciclomatică**: `10`  
+- **Complexitate cognitivă**: `17`  
 - Observație: Recursivitate profundă, multe ramificații, cod duplicat pentru fiecare operator.
 
 ---
@@ -32,29 +32,30 @@
 
 | Fișier         | Linie | Observație                                                                 |
 |----------------|-------|----------------------------------------------------------------------------|
-| Calculator.java | 4     | Declarația `import java.util.Scanner;` apare greșit în interiorul clasei. |
-| Calculator.java | 7     | Clasa `Start` ar trebui să fie într-un fișier separat `Start.java`.       |
-| Calculator.java | 32    | Denumirea metodei `evaluatedExpression` este greșită – ar trebui să fie `evaluateExpression`. |
-| Calculator.java | 40    | Folosirea directă a `0 + expression` este neclară – ar trebui explicată sau encapsulată. |
-| Calculator.java | 43-49 | Se pot unifica verificările simbolurilor printr-o buclă sau mapare.       |
-| Calculator.java | 64    | Lipsă validare expresii incomplete (ex: `2+`).                             |
-| Calculator.java | 73    | Nu se tratează împărțirea la zero – poate duce la excepție sau NaN.       |
-| Calculator.java | 82-145| Cod foarte duplicat; același tipar este repetat pentru toate operațiile.  |
-| Calculator.java | General | Metoda `Calculate` este recursivă, dar fără limită de adâncime – risc de StackOverflow. |
-| Calculator.java | General | Nu există teste unitare – greu de validat corectitudinea.                |
-| Calculator.java | General | Nu se respectă principiul SRP (Single Responsibility Principle).          |
+| Calculator.java | 11    |  Importul Scanner este greșit poziționat (apărea în versiunea anterioară).|
+| Calculator.java | 28    | Separarea simbolurilor matematice este bine realizată în clasa Operations.|
+| Calculator.java | 34-47 | Cod repetitiv pentru identificarea operatorilor; poate fi extras într-o metodă utilitară. |
+| Calculator.java | 72    |  Returnarea mesajului "ERROR" este prea generic. |
+| Calculator.java | 76-134 | Metodă recursivă complexă, greu de întreținut. Recomand refactorizare într-un algoritm  iterativ.|
+| Start.java       | 9   |Se creează un nou Scanner în fiecare iterație – neeficient.                  |
+| Start.java       | 18 |Lipsă validare pentru expresii invalide (ex: litere, simboluri nepermise).   |
 
 ---
 
 ### ✅ 4. Recomandări de îmbunătățire
 
-- ✅ Separă clasele în fișiere diferite (`Start`, `Calculator`, `Operations`)
-- 🔧 Refactorizează metoda `Calculate` pentru a elimina recursivitatea și duplicarea codului
-- ⚠️ Adaugă validări suplimentare (expresii invalide, împărțire la zero)
-- 🧪 Adaugă teste unitare (folosește JUnit)
-- 🧱 Utilizează un parser matematic dedicat în loc de parsare manuală
-- 🧭 Respectă principiile OOP pentru modularitate și mentenabilitate
-- 📚 Adaugă Javadoc pentru metodele publice
+Extrage logica de operare (*, /, +, -) într-o metodă separată.
+
+Înlocuiește recursivitatea din Calculate() cu o buclă while.
+
+Adaugă validare pentru input-ul expresiei.
+
+Creează teste unitare.
+
+Refactorizează structura în clase
+
+
+
 
 ---
 
