@@ -42,17 +42,6 @@
 
 ---
 
-### ✅ 4. Recomandări de îmbunătățire
-
-Extrage logica de operare (*, /, +, -) într-o metodă separată.
-
-Înlocuiește recursivitatea din Calculate() cu o buclă while.
-
-Adaugă validare pentru input-ul expresiei.
-
-Creează teste unitare.
-
-Refactorizează structura în clase
 
 
 
